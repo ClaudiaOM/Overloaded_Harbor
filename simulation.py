@@ -1,22 +1,22 @@
 import random, math
 
-def uniform(a, b):
-    u = random.random()
-    return a + u * (b - a)
+def uniform(left, right):
+    unif = random.random()
+    return left + unif * (right - left)
 
-def exponential(lam):
-    u = uniform(0, 1)
-    return -math.log(u, math.e) / lam
+def exponential(lamb):
+    unif = uniform(0, 1)
+    return -math.log(unif, math.e)/lamb
 
-def normal(mu, theta2):
+def normal(mu, sigma):
     while True:
-        y = exponential(1)
-        u = uniform(0, 1)
-        if u <= math.pow(math.e, -(y - 1) ** 2 / 2):
+        exp = exponential(1)
+        unif = uniform(0, 1)
+        if unif <= math.pow(math.e, -(exp - 1) ** 2 / 2):
             u = uniform(0, 1)
             if u <= .5:
-                sign = 1
+                s = 1
             else:
-                sign = -1
-            return sign * y * math.sqrt(theta2) + mu
+                s = -1
+            return s * exp * math.sqrt(sigma) + mu
 
